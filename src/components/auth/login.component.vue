@@ -1,6 +1,6 @@
 <template>
 <v-container
-        class="fill-height"
+        class="fill-height mx-2"
         fluid
       >
         <v-row
@@ -9,6 +9,7 @@
         >
           <v-col
             cols="12"
+            xs="8"
             sm="8"
             md="4"
           >
@@ -24,7 +25,7 @@
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form class="mx-2">
                   <v-text-field
                     color="green darken-2"
                     label="Correo electrónico"
@@ -42,15 +43,21 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn x-small color="green darken-2"
+                <v-row class="mx-1">
+                  <v-col cols="12" md="12">
+                    <v-btn x-small color="green darken-2"
                       to="/register" link text>
                       No tienes cuenta? Registrate aquí
-                </v-btn>
-                <v-spacer />
-                <v-btn dark color="green darken-2">
-                  Ingresar
-                  <v-icon right small>fas fa-arrow-circle-right</v-icon>
-                </v-btn>
+                    </v-btn>
+                    <v-spacer />
+                  </v-col>
+                  <v-col cols="12" md="12">
+                    <v-btn dark color="green darken-2">
+                      Ingresar
+                      <v-icon right small>fas fa-arrow-circle-right</v-icon>
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-card-actions>
             </v-card>
           </v-col>

@@ -3,6 +3,9 @@
 import LoginComponent from '@/components/auth/login.component.vue';
 import RegisterComponent from '@/components/auth/register.component.vue';
 
+import VueResource from 'vue-resource';
+import Notifications from 'vue-notification';
+
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
@@ -14,6 +17,9 @@ Vue.component('login-component', LoginComponent);
 Vue.component('register-component', RegisterComponent);
 
 Vue.config.productionTip = false;
+
+Vue.use(VueResource);
+Vue.use(Notifications);
 
 new Vue({
   router,

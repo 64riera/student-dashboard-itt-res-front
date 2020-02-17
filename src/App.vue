@@ -20,6 +20,7 @@
         <router-view></router-view>
       </transition>
     </v-content>
+    <notifications group="foo" position="bottom left" />
   </v-app>
 </template>
 
