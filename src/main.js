@@ -1,7 +1,10 @@
 
-// Components
+// Auth components
 import LoginComponent from '@/components/auth/login.component.vue';
 import RegisterComponent from '@/components/auth/register.component.vue';
+
+// Dashboard views
+import Dashboard from '@/views/Dashboard.vue';
 
 import VueResource from 'vue-resource';
 import Notifications from 'vue-notification';
@@ -15,6 +18,9 @@ import vuetify from './plugins/vuetify';
 // Auth Components
 Vue.component('login-component', LoginComponent);
 Vue.component('register-component', RegisterComponent);
+
+// Dashboard views
+Vue.component('dashboard', Dashboard);
 
 Vue.config.productionTip = false;
 
