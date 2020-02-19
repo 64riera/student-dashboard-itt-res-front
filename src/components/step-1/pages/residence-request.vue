@@ -1,11 +1,11 @@
 <template>
   <v-container class="my-4">
-    <v-row>
+    <v-row class="mx-4">
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
         <h1 class="display-1 font-weight-light">Solicitud de Residencias</h1>
       </v-col>
     </v-row>
-    <v-form ref="generalForm">
+    <v-form class="mx-4" ref="generalForm">
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
@@ -95,7 +95,7 @@
         </v-col>
       </v-row>
     </v-form>
-    <v-form ref="companyForm">
+    <v-form class="mx-4" ref="companyForm">
       <h2 class="display-1 font-weight-light">Datos de la empresa</h2>
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -173,7 +173,7 @@
         </v-col>
       </v-row>
     </v-form>
-    <v-form ref="companyForm2">
+    <v-form class="mx-4" ref="companyForm2">
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
@@ -225,7 +225,7 @@
         </v-col>
       </v-row>
     </v-form>
-    <v-form ref="residentForm">
+    <v-form class="mx-4" ref="residentForm">
       <h2 class="display-1 font-weight-light">Datos del residente</h2>
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">

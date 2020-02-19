@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-8">
-    <v-form class="mx-8" ref="registerForm">
+    <v-form class="mx-4" ref="registerForm">
       <h3 class="display-1 font-weight-light mb-4">Registro de usuario</h3>
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" xl="6">
