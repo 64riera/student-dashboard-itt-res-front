@@ -63,7 +63,14 @@ const usersModule = {
       Vue.http.headers.common['auth-token'] = userData.accessToken;
       await Vue.http.post('residence-application', payload)
         .then((response) => {
-          console.log(response);
+          Vue.notify({
+            group: 'foo',
+            title: 'Solicitud enviada',
+            text: 'Los datos se han enviado correctamente',
+            duration: 4500,
+            type: 'success',
+          });
+          return response;
         }, (err) => {
           console.log(err, commit, payload);
         });

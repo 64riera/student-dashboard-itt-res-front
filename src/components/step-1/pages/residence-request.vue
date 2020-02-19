@@ -504,7 +504,10 @@ export default {
   methods: {
     async saveResidenceRequest() {
       if (
-        true
+        this.$refs.generalForm.validate()
+        || this.$refs.companyForm.validate()
+        || this.$refs.companyForm2.validate()
+        || this.$refs.residentForm.validate()
       ) {
         const resRequest = {
           controlNum: this.userData.controlNum,
@@ -546,9 +549,10 @@ export default {
         };
 
         await this.$store.dispatch('usersModule/saveResidenceRequest', resRequest);
+        return this.$router.push({ name: 'Dashboard' });
       }
 
-
+      this.confirmSaveResidenceReq = false;
       return false;
     },
     onConfirmSaveRequ() {
