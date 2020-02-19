@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-4 mx-4">
+  <v-container class="my-4">
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
         <h1 class="display-1 font-weight-light">Solicitud de Residencias</h1>
@@ -7,7 +7,7 @@
     </v-row>
     <v-form ref="generalForm">
       <v-row>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="email"
             :rules="emailRules"
@@ -46,7 +46,7 @@
             color="green darken-2"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="studentCareerNameCoordinator"
             :rules="studentCareerNameCoordinatorRules"
@@ -98,7 +98,7 @@
     <v-form ref="companyForm">
       <h2 class="display-1 font-weight-light">Datos de la empresa</h2>
       <v-row>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="companyName"
             :rules="companyNameRules"
@@ -135,7 +135,7 @@
             color="green darken-2"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="postalCode"
             :rules="postalCodeRules"
@@ -175,7 +175,7 @@
     </v-form>
     <v-form ref="companyForm2">
       <v-row>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="companyOwner"
             :rules="companyOwnerRules"
@@ -199,7 +199,7 @@
             color="green darken-2"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="advisorPosition"
             :rules="advisorPositionRules"
@@ -228,7 +228,7 @@
     <v-form ref="residentForm">
       <h2 class="display-1 font-weight-light">Datos del residente</h2>
       <v-row>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="residentName"
             :rules="residentNameRules"
@@ -266,7 +266,7 @@
             color="green darken-2"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+        <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
           <v-text-field
             v-model="residentSocialSecurity"
             outlined
@@ -293,14 +293,16 @@
             label="Teléfono del residente(no celular)"
             color="green darken-2"
           ></v-text-field>
-          <v-btn class="mr-3" outlined color="green darken-2">
-            <v-icon small left>fas fa-arrow-left</v-icon>
-            Regresar
-          </v-btn>
-          <v-btn @click="onConfirmSaveRequ()" color="green darken-2" dark>
-            Listo, Enviar
-            <v-icon small right>fas fa-share-square</v-icon>
-          </v-btn>
+          <div class="float-right">
+            <v-btn to="/" class="mr-2 mb-3" outlined color="green darken-2">
+                <v-icon small left>fas fa-arrow-left</v-icon>
+                Regresar
+            </v-btn>
+            <v-btn @click="onConfirmSaveRequ()" class="mb-3" color="green darken-2" dark>
+                Listo, Enviar
+                <v-icon small right>fas fa-share-square</v-icon>
+            </v-btn>
+          </div>
         </v-col>
       </v-row>
     </v-form>

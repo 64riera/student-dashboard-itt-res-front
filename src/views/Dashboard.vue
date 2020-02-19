@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="userData" class="my-2 mx-4">
+  <v-container v-if="userData" class="my-2">
     <v-row>
       <v-col class="mb-2" cols="12" sm="12" md="12" lg="12" xl="12">
         <h1 class="display-1 font-weight-light">
@@ -10,7 +10,7 @@
     <v-row>
       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4">
         <template v-if="currentStep === 0">
-          <v-card class="mx-auto" max-width="400" min-height="400">
+          <v-card class="mx-auto" max-width="300" min-height="400">
             <v-img
               class="white--text align-end"
               height="200px"
@@ -42,7 +42,7 @@
       </v-col>
       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4">
         <template v-if="currentStep === 0">
-          <v-card class="mx-auto" max-width="400" min-height="400">
+          <v-card class="mx-auto" max-width="300" min-height="400">
             <v-img
               class="white--text align-end"
               height="200px"
@@ -72,7 +72,7 @@
       </v-col>
       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4">
         <template v-if="currentStep === 0">
-          <v-card class="mx-auto" max-width="400" min-height="400">
+          <v-card class="mx-auto" max-width="300" min-height="400">
             <v-img
               class="white--text align-end"
               height="200px"
