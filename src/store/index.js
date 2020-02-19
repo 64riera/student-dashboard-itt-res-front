@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-const API_HOST = 'http://localhost:4000/api/';
+const API_HOST = 'https://residencias-itt.herokuapp.com/api/';
 
 const usersModule = {
   namespaced: true,
@@ -30,33 +30,27 @@ const usersModule = {
     },
   },
   actions: {
+    // eslint-disable-next-line no-unused-vars
     async saveNewUser({ commit }, payload) {
       Vue.http.options.root = API_HOST;
       await Vue.http.post('register', payload)
-        .then((response) => {
-          console.log(commit, response);
-        }, (error) => {
-          console.log(error);
-        });
+        .then((response) => response, (error) => error);
     },
     async loginUser({ commit }, payload) {
       Vue.http.options.root = API_HOST;
       await Vue.http.post('login', payload)
         .then((response) => {
           commit('setLoginUser', response.body);
-        }, (err) => {
-          console.log(err);
-        });
+        }, (err) => err);
     },
     async getUserData({ commit }, payload) {
       Vue.http.options.root = API_HOST;
       await Vue.http.post('user', { controlNum: payload })
         .then((response) => {
           commit('setUserData', response.body);
-        }, (err) => {
-          console.log(err, commit);
-        });
+        }, (err) => err);
     },
+    // eslint-disable-next-line no-unused-vars
     async saveResidenceRequest({ commit }, payload) {
       const userData = JSON.parse(localStorage.getItem('currentToken'));
       Vue.http.options.root = API_HOST;
@@ -71,9 +65,7 @@ const usersModule = {
             type: 'success',
           });
           return response;
-        }, (err) => {
-          console.log(err, commit, payload);
-        });
+        }, (err) => err);
     },
     logout({ commit }) {
       commit('clearUser');
