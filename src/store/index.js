@@ -23,6 +23,11 @@ const usersModule = {
       localStorage.removeItem('currentToken');
       localStorage.removeItem('isLogged');
     },
+    setUserData(state, payload) {
+      if (!payload) return false;
+      state.user = payload;
+      return true;
+    },
   },
   actions: {
     async saveNewUser({ commit }, payload) {
@@ -43,10 +48,26 @@ const usersModule = {
           console.log(err);
         });
     },
-    // async getUserData({ commit }) {
-    //   Vue.http.options.root = API_HOST;
-    //   await Vue.http.get('user/');
-    // },
+    async getUserData({ commit }, payload) {
+      Vue.http.options.root = API_HOST;
+      await Vue.http.post('user', { controlNum: payload })
+        .then((response) => {
+          commit('setUserData', response.body);
+        }, (err) => {
+          console.log(err, commit);
+        });
+    },
+    async saveResidenceRequest({ commit }, payload) {
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
+      Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
+      await Vue.http.post('residence-application', payload)
+        .then((response) => {
+          console.log(response);
+        }, (err) => {
+          console.log(err, commit, payload);
+        });
+    },
     logout({ commit }) {
       commit('clearUser');
     },

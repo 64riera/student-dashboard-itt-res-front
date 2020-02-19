@@ -32,6 +32,14 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/residence/request',
+    name: 'Residence Request',
+    component: () => import('@/components/step-1/pages/residence-request.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
