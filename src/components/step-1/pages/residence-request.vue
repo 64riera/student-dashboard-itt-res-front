@@ -15,35 +15,35 @@
             type="email"
             required
             label="Dirección de correo electrónico"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="schoolName"
             :rules="schoolNameRules"
             outlined
             label="Nombre de la escuela"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="schoolCity"
             :rules="schoolCityRules"
             outlined
             label="Ciudad o población a la que pertenece la escuela"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="requestDate"
             outlined
             type="date"
             label="Fecha de la solicitud"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="bossNameDivisionOfStudies"
             :rules="bossNameDivisionOfStudiesRules"
             outlined
             label="Nombre del jefe de división de estudios"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -53,35 +53,35 @@
             outlined
             label="Nombre del coordinador de la
                                carrera a la que pertenece el estudiante"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="projectName"
             :rules="projectNameRules"
             outlined
             label="Nombre del proyecto que se presenta"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-label>Origen del proyecto</v-label>
           <v-radio-group v-model="projectOrigin" row>
             <v-radio
-              color="green darken-2"
+              color="green accent-4"
               label="Banco de proyectos"
               value="Banco de proyectos"
             ></v-radio>
             <v-radio
-              color="green darken-2"
+              color="green accent-4"
               label="Propuesta propia"
               value="Propuesta propia"
             ></v-radio>
-            <v-radio color="green darken-2" label="Trabajador" value="Trabajador"></v-radio>
+            <v-radio color="green accent-4" label="Trabajador" value="Trabajador"></v-radio>
           </v-radio-group>
           <v-text-field
             v-model="estimatedPeriod"
             :rules="estimatedPeriodRules"
             outlined
             label="Periodo proyectado"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentsNumber"
@@ -90,7 +90,7 @@
             type="number"
             min="1"
             label="Número de residentes"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -105,34 +105,34 @@
             outlined
             required
             label="Nombre de la empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="companyBranch"
             outlined
             label="Giro, ramo o sector de la empresa(Industrial, servicios, público, privado, otra)"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="rfc"
             :rules="rfcRules"
             outlined
             label="R.F.C"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="companyAdress"
             :rules="companyAdressRules"
             outlined
             label="Domicilio de la empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="suburb"
             :rules="suburbRules"
             outlined
             label="Colonia"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -141,34 +141,34 @@
             :rules="postalCodeRules"
             outlined
             label="Código postal"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="fax"
             outlined
             label="FAX"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="city"
             :rules="cityRules"
             outlined
             label="Ciudad"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="phone"
             :rules="phoneRules"
             outlined
             label="Teléfono(no celular)"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="companyMision"
             :rules="companyMisionRules"
             outlined
             label="Misión de la empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -182,21 +182,21 @@
             outlined
             required
             label="Nombre del titular de la empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="companyOwnerPosition"
             :rules="companyOwnerPositionRules"
             outlined
             label="Puesto del titular de la empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="externalAdvisorName"
             :rules="externalAdvisorNameRules"
             outlined
             label="Nombre del (la) asesor(a) externo(a)"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -205,7 +205,7 @@
             :rules="advisorPositionRules"
             outlined
             label="Puesto del asesor(a)"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="personWhoSignsAgree"
@@ -213,14 +213,14 @@
             outlined
             label="Nombre de la persona que firmará el
                    acuerdo de trabajo. Estudiante- Escuela-Empresa"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="personWhoSignPosition"
             :rules="personWhoSignPositionRules"
             outlined
             label="Puesto de la persona que firmará"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -235,35 +235,35 @@
             outlined
             required
             label="Nombre del residente"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentCareer"
             :rules="residentCareerRules"
             outlined
             label="Carrera del residente"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentControlNumber"
             :rules="residentControlNumberRules"
             outlined
             label="No. de control"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentAddress"
             :rules="residentAddressRules"
             outlined
             label="Domicilio del residente"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentEmail"
             :rules="residentEmailRules"
             outlined
             label="Email del residente"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
         </v-col>
         <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -271,34 +271,34 @@
             v-model="residentSocialSecurity"
             outlined
             label="Seleccione su institución de seguridad social"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentSecurityNumber"
             outlined
             label="Número de Seguro"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentCity"
             :rules="residentCityRules"
             outlined
             label="Ciudad del residente"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <v-text-field
             v-model="residentPhone"
             :rules="residentPhoneRules"
             outlined
             label="Teléfono del residente(no celular)"
-            color="green darken-2"
+            color="green accent-4"
           ></v-text-field>
           <div class="float-right">
-            <v-btn to="/" class="mr-2 mb-3" outlined color="green darken-2">
+            <v-btn to="/" class="mr-2 mb-3" outlined color="green accent-4">
                 <v-icon small left>fas fa-arrow-left</v-icon>
                 Regresar
             </v-btn>
-            <v-btn @click="onConfirmSaveRequ()" class="mb-3" color="green darken-2" dark>
+            <v-btn @click="onConfirmSaveRequ()" class="mb-3" color="green accent-4" dark>
                 Listo, Enviar
                 <v-icon small right>fas fa-share-square</v-icon>
             </v-btn>
@@ -321,7 +321,7 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            color="green darken-2"
+            color="green accent-4"
             outlined
             @click="confirmSaveResidenceReq = false"
           >
@@ -330,7 +330,7 @@
           </v-btn>
 
           <v-btn
-            color="green darken-2"
+            color="green accent-4"
             dark
             @click="saveResidenceRequest()"
           >

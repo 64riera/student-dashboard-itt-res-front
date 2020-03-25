@@ -2,8 +2,9 @@
   <v-app>
     <v-app-bar
       app
-      color="green darken-2"
+      color="green accent-4"
       dark
+      elevate-on-scroll
     >
 
       <v-app-bar-nav-icon>
@@ -17,7 +18,7 @@
       <v-spacer></v-spacer>
 
       <v-btn to="/home" v-show="isLogged" text color="white">
-        <v-icon>fas fa-home</v-icon>
+        <v-icon>fas fa-arrow-left</v-icon>
       </v-btn>
       <v-btn @click="logout()" v-show="isLogged" text color="white">
         Salir
