@@ -17,7 +17,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn to="/home" v-show="isLogged" text color="white">
+      <v-btn to="/home" v-if="isLogged && this.$route.name !== 'Dashboard'" text color="white">
         <v-icon>fas fa-arrow-left</v-icon>
       </v-btn>
       <v-btn @click="logout()" v-show="isLogged" text color="white">
