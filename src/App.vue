@@ -7,19 +7,20 @@
       elevate-on-scroll
     >
 
-      <v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="this.$route.name === 'Dashboard'">
         <img src="favicon.ico" style="width: 40px;" alt="">
       </v-app-bar-nav-icon>
 
-      <v-toolbar-title>
+      <v-toolbar-title v-if="this.$route.name === 'Dashboard'">
         ITT - Residencias
       </v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <v-btn to="/home" v-if="isLogged && this.$route.name !== 'Dashboard'" text color="white">
         <v-icon>fas fa-arrow-left</v-icon>
       </v-btn>
+
+      <v-spacer></v-spacer>
+
       <v-btn @click="logout()" v-show="isLogged" text color="white">
         Salir
         <v-icon right small>fas fa-sign-out-alt</v-icon>
