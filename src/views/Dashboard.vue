@@ -29,14 +29,14 @@
 
             <v-tabs-items v-model="dashboardTab">
               <v-tab-item value="tab-1">
-                  <v-container>
-                    <h2 class="text-center mx-8 font-weight-light">
+                  <v-container class="px-4 py-5">
+                    <h2 class="text-center mx-8 my-2 font-weight-light">
                       Bienvenido {{ userData.name }} {{ userData.lastName }}
                     </h2>
                     <v-row>
                       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4">
                         <template v-if="currentStep === 0">
-                          <v-card elevation="1" class="mx-auto" max-width="300" min-height="400">
+                          <v-card outlined class="mx-auto" max-width="300" min-height="400">
                             <v-img
                               class="white--text align-end"
                               height="200px"
@@ -70,7 +70,7 @@
                       </v-col>
                       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4">
                         <template v-if="currentStep === 0">
-                          <v-card elevation="1" class="mx-auto" max-width="300" min-height="400">
+                          <v-card outlined class="mx-auto" max-width="300" min-height="400">
                             <v-img
                               class="white--text align-end"
                               height="200px"
@@ -103,7 +103,7 @@
                       </v-col>
                       <v-col cols="12" xs="12" sm="6" md="4" lg="4" xl="4" v-if="!step1cCompleted">
                         <template>
-                          <v-card elevation="1" class="mx-auto" max-width="300" min-height="400">
+                          <v-card outlined class="mx-auto" max-width="300" min-height="400">
                             <v-img
                               class="white--text align-end"
                               height="200px"
@@ -139,8 +139,9 @@
                   <v-row class="px-5">
                     <v-col cols="12" xs="12" sm="12" md="12" xl="12">
                       <template>
-                        <v-timeline>
+                        <v-timeline dense class="animated fadeInUp">
                           <v-timeline-item
+                            fill-dot
                             v-for="(step, i) in steps"
                             :key="i"
                             :color="step.color"
