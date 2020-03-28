@@ -67,6 +67,36 @@ const usersModule = {
           return response;
         }, (err) => err);
     },
+    // eslint-disable-next-line no-unused-vars
+    async uploadFileStep({ commit }, payload) {
+      if (!payload) return false;
+      let state = false;
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
+      Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
+      Vue.http.post('file-upload', payload)
+        .then(() => {
+          Vue.notify({
+            group: 'foo',
+            title: 'Archivo enviado',
+            text: 'Los datos se han enviado correctamente',
+            duration: 4500,
+            type: 'success',
+          });
+          state = true;
+        })
+        .catch(() => {
+          Vue.notify({
+            group: 'foo',
+            title: 'Archivo no enviado',
+            text: 'Verifica tu conexión y si el archivo es de tipo doc, docx o pdf',
+            duration: 4500,
+            type: 'error',
+          });
+          state = false;
+        });
+      return state;
+    },
     logout({ commit }) {
       commit('clearUser');
     },
