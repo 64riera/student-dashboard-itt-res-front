@@ -141,6 +141,29 @@
               <v-tab-item value="tab-2">
                 <v-container>
                   <v-row class="px-5">
+                    <v-col cols="12" xs="12" sm="12" md="4" xl="6">
+                      <v-card class="text-center pa-1 mt-4 animated fadeIn" outlined>
+                        <v-card-title class="">
+                          <h4 class="font-weight-light">Tu avance actual, {{ userData.name }}</h4>
+                        </v-card-title>
+                        <v-card-text>
+                          <v-progress-circular class="animated infinite pulse"
+                          :rotate="90" :size="100" :width="15" color="red accent-3"
+                          :value="actualProgress">
+                            {{ actualProgress }} %
+                          </v-progress-circular>
+                          <p class="mt-4">Completado, Vamos!</p>
+                          <v-btn dark depressed rounded small color="orange accent-4">
+                            Tienes dudas? Presiona aquí
+                          </v-btn>
+                        </v-card-text>
+                      </v-card>
+                      <v-card class="text-center pa-1 mt-4 animated fadeIn" outlined>
+                        <v-card-text>
+                          <h4 class="font-weight-light">Más secciones proximamente...</h4>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
                     <v-col cols="12" xs="12" sm="12" md="8" xl="6">
                       <template>
                         <v-timeline dense class="animated fadeInUp">
@@ -169,24 +192,6 @@
                           </v-timeline-item>
                         </v-timeline>
                       </template>
-                    </v-col>
-                    <v-col cols="12" xs="12" sm="12" md="4" xl="6">
-                      <v-card class="text-center pa-1 mt-4a animated fadeIn" outlined>
-                        <v-card-title class="">
-                          <h4 class="font-weight-light">Tu avance actual, {{ userData.name }}</h4>
-                        </v-card-title>
-                        <v-card-text>
-                          <v-progress-circular class="animated infinite pulse"
-                          :rotate="90" :size="100" :width="15" color="red accent-3"
-                          :value="actualProgress">
-                            {{ actualProgress }} %
-                          </v-progress-circular>
-                          <p class="mt-4">Completado, Vamos!</p>
-                          <v-btn dark depressed rounded small color="orange accent-4">
-                            Tienes dudas? Presiona aquí
-                          </v-btn>
-                        </v-card-text>
-                      </v-card>
                     </v-col>
                   </v-row>
                 </v-container>
