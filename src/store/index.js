@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-const API_HOST = 'https://residencias-itt.herokuapp.com/api/';
+// const API_HOST = 'https://residencias-itt.herokuapp.com/api/';
+const API_HOST = 'http://localhost:4000/api/';
+const DROPBOX_API_KEY = 'kgelLPrhZFAAAAAAAAAAZmWpia4_65SXeQiQeFz6OAqGgPcXDhaCneFR1XbpAxax';
+const DROPBOX_API_URL = 'https://content.dropboxapi.com/2/files/upload';
 
 const usersModule = {
   namespaced: true,
@@ -9,6 +12,7 @@ const usersModule = {
     users: null,
     user: null,
     isLogged: false,
+    disabledAndLoading: false,
   },
   mutations: {
     setLoginUser(state, payload) {
@@ -27,6 +31,9 @@ const usersModule = {
       if (!payload) return false;
       state.user = payload;
       return true;
+    },
+    setDisabledAndLoading(state, payload) {
+      state.disabledAndLoading = payload;
     },
   },
   actions: {
@@ -70,32 +77,67 @@ const usersModule = {
     // eslint-disable-next-line no-unused-vars
     async uploadFileStep({ commit }, payload) {
       if (!payload) return false;
-      let state = false;
+
+      commit('setDisabledAndLoading', true);
+
       const userData = JSON.parse(localStorage.getItem('currentToken'));
       Vue.http.options.root = API_HOST;
       Vue.http.headers.common['auth-token'] = userData.accessToken;
-      Vue.http.post('file-upload', payload)
+      await Vue.http.post('file-upload', payload)
         .then(() => {
           Vue.notify({
             group: 'foo',
-            title: 'Archivo enviado',
+            title: 'Solicitud completada',
             text: 'Los datos se han enviado correctamente',
             duration: 4500,
             type: 'success',
           });
-          state = true;
         })
         .catch(() => {
           Vue.notify({
             group: 'foo',
-            title: 'Archivo no enviado',
+            title: 'Solicitud incompleta',
             text: 'Verifica tu conexión y si el archivo es de tipo doc, docx o pdf',
             duration: 4500,
             type: 'error',
           });
-          state = false;
+          commit('setDisabledAndLoading', false);
+          return false;
         });
-      return state;
+
+      await fetch(DROPBOX_API_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${DROPBOX_API_KEY}`,
+          'Content-Type': 'application/octet-stream',
+          'Dropbox-API-Arg': `{"path":"/ResidenceStudentsFiles/${payload.fileName}"}`,
+        },
+        body: payload.file,
+      })
+        .then((res) => res.json())
+        .then(() => {
+          Vue.notify({
+            group: 'foo',
+            title: 'Documento procesado',
+            text: 'Se ha recibido su documento',
+            duration: 4500,
+            type: 'success',
+          });
+        })
+        .catch(() => {
+          Vue.notify({
+            group: 'foo',
+            title: 'Documento no procesado',
+            text: 'Reintente por favor',
+            duration: 4500,
+            type: 'error',
+          });
+        });
+
+      commit('setDisabledAndLoading', false);
+
+      // eslint-disable-next-line no-restricted-globals
+      return location.reload();
     },
     logout({ commit }) {
       commit('clearUser');
