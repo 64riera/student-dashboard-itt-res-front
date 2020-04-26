@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-// const API_HOST = 'https://residencias-itt.herokuapp.com/api/';
-const API_HOST = 'http://localhost:4000/api/';
-const DROPBOX_API_KEY = 'kgelLPrhZFAAAAAAAAAAZmWpia4_65SXeQiQeFz6OAqGgPcXDhaCneFR1XbpAxax';
-const DROPBOX_API_URL = 'https://content.dropboxapi.com/2/files/upload';
+const API_HOST = process.env.VUE_APP_API_HOST;
+const DROPBOX_API_KEY = process.env.VUE_APP_DROPBOX_API_KEY;
+const DROPBOX_API_URL = process.env.VUE_APP_DROPBOX_API_URL;
 
 const usersModule = {
   namespaced: true,
