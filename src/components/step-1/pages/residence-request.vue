@@ -35,6 +35,7 @@
             v-model="requestDate"
             outlined
             type="date"
+            min="2018-01-01" max="2100-12-31"
             label="Fecha de la solicitud"
             color="green accent-4"
           ></v-text-field>
@@ -88,7 +89,12 @@
             :rules="residentsNumberRules"
             outlined
             type="number"
+            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
             min="1"
+            max="20"
+            maxlength="2"
+            oninput="if(this.value.length > this.maxLength)
+            this.value = this.value.slice(0, this.maxLength);"
             label="Número de residentes"
             color="green accent-4"
           ></v-text-field>

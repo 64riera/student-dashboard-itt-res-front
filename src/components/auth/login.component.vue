@@ -43,7 +43,9 @@
                     v-model="password"
                     :rules="passwordRules"
                     prepend-icon="fas fa-lock"
-                    type="password"
+                    :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="showPass = !showPass"
+                    :type="showPass ? 'text' : 'password'"
                     @keypress.enter="login()"
                   />
                 </v-form>
@@ -84,6 +86,7 @@ export default {
       (v) => !!v || 'Campo obligatorio',
       (v) => (v && v.length >= 5) || 'Ingrese una contraseña válida',
     ],
+    showPass: false,
     loginLoader: false,
   }),
   created() {

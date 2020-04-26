@@ -21,7 +21,14 @@
           <v-text-field
             color="green accent-4"
             outlined
+            type="number"
             label="Edad"
+            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+            min="17"
+            max="78"
+            maxlength="2"
+            oninput="if(this.value.length > this.maxLength)
+            this.value = this.value.slice(0, this.maxLength);"
             v-model="age"
             :rules="ageRules"
           ></v-text-field>
@@ -36,7 +43,9 @@
             color="green accent-4"
             outlined
             label="Contraseña"
-            type="password"
+            :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="showPass = !showPass"
+            :type="showPass ? 'text' : 'password'"
             v-model="password"
             :rules="passwordRules"
           ></v-text-field>
@@ -59,6 +68,13 @@
           <v-text-field
             color="green accent-4"
             outlined
+            type="number"
+            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+            min="1"
+            max="20"
+            maxlength="2"
+            oninput="if(this.value.length > this.maxLength)
+            this.value = this.value.slice(0, this.maxLength);"
             v-model="semester"
             :rules="semesterRules"
             label="Semestre"
@@ -133,6 +149,7 @@ export default {
       (v) => !!v || 'Campo obligatorio',
       (v) => (v && v.length >= 5) || 'Ingrese una contraseña válida, mayor a 5 caracteres',
     ],
+    showPass: false,
   }),
   methods: {
     async saveUser() {

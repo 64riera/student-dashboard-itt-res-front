@@ -1,19 +1,11 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="green accent-4"
-      dark
-      elevate-on-scroll
-    >
-
+    <v-app-bar app color="green accent-4" dark elevate-on-scroll>
       <v-app-bar-nav-icon v-if="this.$route.name === 'Dashboard'">
-        <img src="favicon.ico" style="width: 40px;" alt="">
+        <img src="favicon.ico" style="width: 40px;" alt />
       </v-app-bar-nav-icon>
 
-      <v-toolbar-title v-if="this.$route.name === 'Dashboard'">
-        ITT - Residencias
-      </v-toolbar-title>
+      <v-toolbar-title v-if="this.$route.name === 'Dashboard'">ITT - Residencias</v-toolbar-title>
 
       <v-btn to="/home" v-if="isLogged && this.$route.name !== 'Dashboard'" text color="white">
         <v-icon>fas fa-arrow-left</v-icon>
@@ -25,7 +17,6 @@
         Salir
         <v-icon right small>fas fa-sign-out-alt</v-icon>
       </v-btn>
-
     </v-app-bar>
 
     <v-content>
@@ -34,15 +25,49 @@
       </transition>
     </v-content>
     <notifications group="foo" position="bottom left" />
+    <template class="animated fadeIn">
+      <v-footer dark padless>
+        <v-card class="flex" flat tile>
+          <v-card-title class="grey accent-3" v-if="this.$route.name !== 'Dashboard'">
+            <strong
+              class="subheading"
+            >Tienes en mente un proyecto o alguna pregunta sobre programación? Contáctame en :
+            </strong>
+
+            <v-spacer></v-spacer>
+
+            <v-btn v-for="icon in icons" :key="icon.iconImage"
+                   class="mx-4" dark icon target="_blank" :href="icon.link">
+              <v-icon size="24px">{{ icon.iconImage }}</v-icon>
+            </v-btn>
+          </v-card-title>
+
+          <v-card-text class="py-2 white--text text-center">
+            {{ new Date().getFullYear() }} —
+            <strong>Desarrollado por © Sergio Rivera con &hearts;</strong>
+          </v-card-text>
+        </v-card>
+      </v-footer>
+    </template>
   </v-app>
 </template>
 
-<script>
 
+<script>
 export default {
   name: 'App',
   data: () => ({
     isLogged: false,
+    icons: [
+      {
+        iconImage: 'fab fa-twitter',
+        link: 'https://twitter.com/networkchetos',
+      },
+      {
+        iconImage: 'fab fa-linkedin',
+        link: 'https://www.linkedin.com/in/sergio-rivera-9b4b47179',
+      },
+    ],
   }),
   beforeUpdate() {
     if (localStorage.getItem('isLogged') === 'true') {
@@ -61,16 +86,18 @@ export default {
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition-property: opacity;
-  transition-duration: .20s;
+  transition-duration: 0.2s;
 }
 
 .fade-enter-active {
-  transition-delay: .20s;
+  transition-delay: 0.2s;
 }
 
-.fade-enter, .fade-leave-active {
-  opacity: 0
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
