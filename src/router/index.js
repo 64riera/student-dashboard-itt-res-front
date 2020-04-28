@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
+  // Student routes
   {
     path: '/',
     redirect: '/login',
@@ -40,6 +41,27 @@ const routes = [
       requiresAuth: true,
     },
   },
+  // Admin routes
+  {
+    path: '/admin/',
+    redirect: '/admin/login',
+  },
+  {
+    path: '/admin/login',
+    name: 'Admin login',
+    component: () => import('@/components/admin/auth/login.component.vue'),
+    meta: {
+      noRequiresAuth: true,
+    },
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'Admin dashboard',
+    component: () => import('@/views/admin/Dashboard.vue'),
+    meta: {
+      requiresAdminAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -57,6 +79,20 @@ router.beforeEach((to, from, next) => {
   if (to.meta.noRequiresAuth) {
     if (localStorage.getItem('isLogged') === 'true') {
       router.push({ name: 'Dashboard' });
+    } else {
+      next();
+    }
+  }
+  if (to.meta.requiresAdminAuth) {
+    if (localStorage.getItem('isLogged') === 'true') {
+      next();
+    } else {
+      router.push({ name: 'Admin login' });
+    }
+  }
+  if (to.meta.noRequiresAdminAuth) {
+    if (localStorage.getItem('isLogged') === 'true') {
+      router.push({ name: 'Admin dashboard' });
     } else {
       next();
     }

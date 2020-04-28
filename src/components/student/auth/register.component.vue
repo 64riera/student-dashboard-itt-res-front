@@ -129,7 +129,7 @@ export default {
       (v) => !!v || 'Campo obligatorio',
       (v) => (v && v.length >= 5) || 'Ingrese un número de control válido',
     ],
-    period: 'ENE-JUN2020',
+    period: `ENE-JUN${new Date().getFullYear()}`,
     periodRules: [
       (v) => !!v || 'Campo obligatorio',
       (v) => (v && v.length >= 5) || 'Ingrese un periodo válido',
