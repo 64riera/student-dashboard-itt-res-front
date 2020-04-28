@@ -5,23 +5,27 @@
       v-if="this.$route.fullPath"
       :color="this.$route.fullPath.includes('admin') ? primaryColorAdmin : primaryColor"
       dark
+      class="animated fadeInDown slow"
       elevate-on-scroll
     >
 
-      <v-app-bar-nav-icon v-if="this.$route.name === 'Dashboard'">
+      <v-app-bar-nav-icon class="animated fadeIn" v-if="this.$route.name === 'Dashboard'">
         <img src="favicon.ico" style="width: 40px;" alt />
       </v-app-bar-nav-icon>
 
       <v-app-bar-nav-icon @click="changeDrawerState()"
         v-if="this.$route.name === 'Admin dashboard' &&
-             (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)">
+             (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)"
+             class="animated fadeIn">
       </v-app-bar-nav-icon>
 
-      <v-app-bar-nav-icon v-if="this.$route.fullPath.includes('admin')">
+      <v-app-bar-nav-icon class="animated fadeIn" v-if="this.$route.fullPath.includes('admin')">
         <v-icon>fas fa-chalkboard-teacher</v-icon>
       </v-app-bar-nav-icon>
 
-      <v-toolbar-title v-if="this.$route.name === 'Dashboard'">ITT - Residencias</v-toolbar-title>
+      <v-toolbar-title v-if="this.$route.name === 'Dashboard'">
+        ITT - Residencias
+      </v-toolbar-title>
 
       <v-btn
         to="/home"
@@ -30,23 +34,34 @@
               !this.$route.fullPath.includes('admin')"
         text
         color="white"
+        class="animated fadeIn"
       >
         <v-icon>fas fa-arrow-left</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
 
-      <v-btn @click="logout()" v-show="isLogged" text color="white">
+      <v-btn class="animated fadeIn" @click="logout()" v-show="isLogged" text color="white">
         Salir
         <v-icon right small>fas fa-sign-out-alt</v-icon>
       </v-btn>
       <template v-if="this.$route.name === 'Login'">
-        <v-btn to="/admin/dashboard" :color="secondaryColor" dark absolute bottom right fab>
+        <v-btn to="/admin/dashboard"
+               :color="secondaryColor"
+               class="animated fadeIn"
+               dark absolute bottom
+               right
+               fab>
           <v-icon>fas fa-user-tie</v-icon>
         </v-btn>
       </template>
       <template v-if="this.$route.name === 'Admin login'">
-        <v-btn to="/" :color="secondaryColorAdmin" dark absolute bottom right fab>
+        <v-btn to="/"
+               :color="secondaryColorAdmin"
+               class="animated fadeIn"
+               dark absolute bottom
+               right
+               fab>
           <v-icon>fas fa-user</v-icon>
         </v-btn>
       </template>
