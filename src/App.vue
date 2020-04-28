@@ -12,7 +12,10 @@
         <img src="favicon.ico" style="width: 40px;" alt />
       </v-app-bar-nav-icon>
 
-      <v-app-bar-nav-icon @click="changeDrawerState()"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="changeDrawerState()"
+        v-if="this.$route.name === 'Admin dashboard' &&
+             (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)">
+      </v-app-bar-nav-icon>
 
       <v-app-bar-nav-icon v-if="this.$route.fullPath.includes('admin')">
         <v-icon>fas fa-chalkboard-teacher</v-icon>
@@ -99,12 +102,6 @@ export default {
   name: 'App',
   data: () => ({
     isLogged: false,
-    adminDrawer: false,
-    items: [
-      { title: 'Inicio', icon: 'mdi-home-city' },
-      { title: 'My Account', icon: 'mdi-account' },
-      { title: 'Users', icon: 'mdi-account-group-outline' },
-    ],
     icons: [
       {
         iconImage: 'fab fa-twitter',

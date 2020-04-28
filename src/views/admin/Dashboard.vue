@@ -9,7 +9,7 @@
               <template v-slot:prepend>
                 <v-list-item two-line>
                   <v-list-item-avatar>
-                    <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+                    <img src="https://randomuser.me/api/portraits/men/81.jpg" />
                   </v-list-item-avatar>
 
                   <v-list-item-content>
@@ -179,19 +179,6 @@ export default {
         this.$store.dispatch('UI/changeDrawer', newDrawer);
       },
     },
-    imageHeight() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return '220px';
-        case 'sm': return '400px';
-        case 'md': return '500px';
-        case 'lg': return '600px';
-        case 'xl': return '800px';
-        default: return false;
-      }
-    },
-  },
-  mounted() {
-    console.log(this.$vuetify.breakpoint);
   },
   async created() {
     await this.assignUserData();
