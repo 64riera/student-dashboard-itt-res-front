@@ -149,12 +149,19 @@ const UI = {
   state: {
     primaryColor: 'green accent-4',
     secondaryColor: 'green darken-1',
+    primaryColorAdmin: 'light-blue',
+    secondaryColorAdmin: 'light-blue darken-1',
+    adminDrawer: false,
   },
   mutations: {
-
+    mutateDrawerState(state, payload) {
+      state.adminDrawer = payload;
+    },
   },
   actions: {
-
+    changeDrawer({ commit }, payload) {
+      commit('mutateDrawerState', payload);
+    },
   },
 };
 
