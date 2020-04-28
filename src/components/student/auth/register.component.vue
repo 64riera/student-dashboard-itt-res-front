@@ -5,21 +5,21 @@
       <v-row>
         <v-col cols="12" xs="12" sm="12" md="6" xl="6">
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             label="Nombre(s)"
             v-model="name"
             :rules="nameRules"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             label="Apellidos"
             v-model="lastName"
             :rules="lastNameRules"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             type="number"
             label="Edad"
@@ -33,14 +33,14 @@
             :rules="ageRules"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             label="Correo electrónico"
             v-model="email"
             :rules="emailRules"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             label="Contraseña"
             :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
@@ -52,21 +52,21 @@
         </v-col>
         <v-col cols="12" xs="12" sm="12" md="6" xl="6">
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             label="Número de control"
             v-model="controlNum"
             :rules="controlNumRules"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             v-model="period"
             :rules="periodRules"
             label="Periódo"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             type="number"
             onkeypress='return event.charCode >= 48 && event.charCode <= 57'
@@ -80,17 +80,17 @@
             label="Semestre"
           ></v-text-field>
           <v-text-field
-            color="green accent-4"
+            :color="primaryColor"
             outlined
             v-model="career"
             :rules="careerRules"
             label="Carrera en curso"
           ></v-text-field>
           <div class="float-right">
-            <v-btn outlined class="mr-2 mb-2" color="green accent-4" to="/">
+            <v-btn outlined class="mr-2 mb-2" :color="primaryColor" to="/">
               <v-icon left small>fas fa-arrow-left</v-icon>Regresar
             </v-btn>
-            <v-btn @click="saveUser()" dark class="mb-2" color="green accent-4">
+            <v-btn @click="saveUser()" dark class="mb-2" :color="primaryColor">
               Listo, registrarme
               <v-icon right small>far fa-check-circle</v-icon>
             </v-btn>
@@ -176,6 +176,11 @@ export default {
         type: 'success',
       });
       return this.$router.push('/');
+    },
+  },
+  computed: {
+    primaryColor() {
+      return this.$store.state.UI.primaryColor;
     },
   },
 };

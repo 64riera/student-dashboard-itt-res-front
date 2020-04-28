@@ -15,7 +15,7 @@
           >
             <v-card class="elevation-24" :loading="loginLoader">
               <v-toolbar
-                color="green accent-4"
+                :color="primaryColor"
                 dark
                 flat
               >
@@ -27,7 +27,7 @@
               <v-card-text>
                 <v-form class="mx-2" ref="loginForm">
                   <v-text-field
-                    color="green accent-4"
+                    :color="primaryColor"
                     label="Correo electrónico"
                     v-model="email"
                     :rules="emailRules"
@@ -37,7 +37,7 @@
                   />
 
                   <v-text-field
-                    color="green accent-4"
+                    :color="primaryColor"
                     id="password"
                     label="Contraseña"
                     v-model="password"
@@ -53,14 +53,14 @@
               <v-card-actions>
                 <v-row class="mx-1">
                   <v-col cols="12" md="12">
-                    <v-btn x-small color="green accent-4"
+                    <v-btn x-small :color="primaryColor"
                       to="/register" link text>
                       No tienes cuenta? Registrate aquí
                     </v-btn>
                     <v-spacer />
                   </v-col>
                   <v-col cols="12" md="12">
-                    <v-btn @click="login()" dark color="green accent-4">
+                    <v-btn @click="login()" dark :color="primaryColor">
                       Ingresar
                       <v-icon right small>fas fa-arrow-circle-right</v-icon>
                     </v-btn>
@@ -114,6 +114,11 @@ export default {
       }
       this.loginLoader = false;
       return this.$router.push('/home');
+    },
+  },
+  computed: {
+    primaryColor() {
+      return this.$store.state.UI.primaryColor;
     },
   },
 };

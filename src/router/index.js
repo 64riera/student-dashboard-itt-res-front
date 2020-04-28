@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/components/auth/login.component.vue'),
+    component: () => import('@/components/student/auth/login.component.vue'),
     meta: {
       noRequiresAuth: true,
     },
@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('@/components/auth/register.component.vue'),
+    component: () => import('@/components/student/auth/register.component.vue'),
     meta: {
       noRequiresAuth: true,
     },
@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/home',
     name: 'Dashboard',
-    component: () => import('@/views/Dashboard.vue'),
+    component: () => import('@/views/student/Dashboard.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/residence/request',
     name: 'Residence Request',
-    component: () => import('@/components/step-1/pages/residence-request.vue'),
+    component: () => import('@/components/student/step-1/pages/residence-request.vue'),
     meta: {
       requiresAuth: true,
     },

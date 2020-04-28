@@ -144,6 +144,20 @@ const usersModule = {
   },
 };
 
+const UI = {
+  namespaced: true,
+  state: {
+    primaryColor: 'green accent-4',
+    secondaryColor: 'green darken-1',
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  },
+};
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -155,5 +169,6 @@ export default new Vuex.Store({
   },
   modules: {
     usersModule,
+    UI,
   },
 });

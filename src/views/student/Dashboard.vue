@@ -6,7 +6,7 @@
           <v-card elevation="24">
             <v-tabs
               v-model="dashboardTab"
-              background-color="green accent-4"
+              :background-color="primaryColor"
               centered
               class="mt-4"
               dark
@@ -673,6 +673,9 @@ export default {
     },
     disabledAndLoading() {
       return this.$store.state.usersModule.disabledAndLoading;
+    },
+    primaryColor() {
+      return this.$store.state.UI.primaryColor;
     },
   },
   async created() {

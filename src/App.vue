@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="green accent-4" dark elevate-on-scroll>
+    <v-app-bar app :color="primaryColor" dark elevate-on-scroll>
       <v-app-bar-nav-icon v-if="this.$route.name === 'Dashboard'">
         <img src="favicon.ico" style="width: 40px;" alt />
       </v-app-bar-nav-icon>
@@ -17,6 +17,11 @@
         Salir
         <v-icon right small>fas fa-sign-out-alt</v-icon>
       </v-btn>
+      <template v-if="this.$route.name === 'Login'">
+        <v-btn :color="secondaryColor" dark absolute bottom right fab>
+          <v-icon>fas fa-user-tie</v-icon>
+        </v-btn>
+      </template>
     </v-app-bar>
 
     <v-content>
@@ -29,15 +34,22 @@
       <v-footer dark padless>
         <v-card class="flex" flat tile>
           <v-card-title class="grey accent-3" v-if="this.$route.name !== 'Dashboard'">
-            <strong
-              class="subheading"
-            >Tienes en mente un proyecto o alguna pregunta sobre programación? Contáctame en :
-            </strong>
+            <strong class="subheading"
+              >Tienes en mente un proyecto o alguna pregunta sobre programación? Contáctame en
+              :</strong
+            >
 
             <v-spacer></v-spacer>
 
-            <v-btn v-for="icon in icons" :key="icon.iconImage"
-                   class="mx-4" dark icon target="_blank" :href="icon.link">
+            <v-btn
+              v-for="icon in icons"
+              :key="icon.iconImage"
+              class="mx-4"
+              dark
+              icon
+              target="_blank"
+              :href="icon.link"
+            >
               <v-icon size="24px">{{ icon.iconImage }}</v-icon>
             </v-btn>
           </v-card-title>
@@ -51,7 +63,6 @@
     </template>
   </v-app>
 </template>
-
 
 <script>
 export default {
@@ -80,6 +91,14 @@ export default {
     async logout() {
       await this.$store.dispatch('usersModule/logout');
       this.$router.push({ name: 'Login' });
+    },
+  },
+  computed: {
+    primaryColor() {
+      return this.$store.state.UI.primaryColor;
+    },
+    secondaryColor() {
+      return this.$store.state.UI.secondaryColor;
     },
   },
 };

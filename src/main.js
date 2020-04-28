@@ -1,10 +1,10 @@
 
 // Auth components
-import LoginComponent from '@/components/auth/login.component.vue';
-import RegisterComponent from '@/components/auth/register.component.vue';
+import LoginComponent from '@/components/student/auth/login.component.vue';
+import RegisterComponent from '@/components/student/auth/register.component.vue';
 
 // Dashboard views
-import Dashboard from '@/views/Dashboard.vue';
+import Dashboard from '@/views/student/Dashboard.vue';
 
 import VueResource from 'vue-resource';
 import Notifications from 'vue-notification';
