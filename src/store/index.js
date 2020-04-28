@@ -12,6 +12,8 @@ const usersModule = {
     user: null,
     isLogged: false,
     disabledAndLoading: false,
+    studentsData: null,
+    loadingStudentsData: false,
   },
   mutations: {
     setLoginUser(state, payload) {
@@ -33,6 +35,12 @@ const usersModule = {
     },
     setDisabledAndLoading(state, payload) {
       state.disabledAndLoading = payload;
+    },
+    setLoadingStudentsData(state, payload) {
+      state.loadingStudentsData = payload;
+    },
+    setStudentsData(state, payload) {
+      state.studentsData = payload;
     },
   },
   actions: {
@@ -140,6 +148,23 @@ const usersModule = {
     },
     logout({ commit }) {
       commit('clearUser');
+    },
+    async getStudentsData({ commit }) {
+      commit('setLoadingStudentsData', true);
+
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
+      Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
+      await Vue.http.get('get')
+        .then((data) => {
+          commit('setStudentsData', data.body.users);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          commit('setLoadingStudentsData', false);
+        });
     },
   },
 };

@@ -58,8 +58,8 @@
       </transition>
     </v-content>
     <notifications group="foo" position="bottom left" />
-    <template class="animated fadeIn">
-      <v-footer dark padless>
+    <template>
+      <v-footer class="animated fadeInUp slow" dark padless>
         <v-card class="flex dark" flat tile>
           <v-card-text
             v-if="!this.$route.fullPath.includes('login')"
