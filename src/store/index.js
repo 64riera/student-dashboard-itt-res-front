@@ -58,7 +58,9 @@ const usersModule = {
         }, (err) => err);
     },
     async getUserData({ commit }, payload) {
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
       Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
       await Vue.http.post('user', { controlNum: payload })
         .then((response) => {
           commit('setUserData', response.body);
@@ -121,17 +123,18 @@ const usersModule = {
         },
         body: payload.file,
       })
-        .then((res) => res.json())
-        .then(() => {
-          Vue.notify({
-            group: 'foo',
-            title: 'Documento procesado',
-            text: 'Se ha recibido su documento',
-            duration: 4500,
-            type: 'success',
-          });
-        })
-        .catch(() => {
+        .then((response) => {
+          if (response.ok) {
+            Vue.notify({
+              group: 'foo',
+              title: 'Documento procesado',
+              text: 'Se ha recibido su documento',
+              duration: 4500,
+              type: 'success',
+            });
+            // eslint-disable-next-line no-restricted-globals
+            return location.reload();
+          }
           Vue.notify({
             group: 'foo',
             title: 'Documento no procesado',
@@ -139,12 +142,15 @@ const usersModule = {
             duration: 4500,
             type: 'error',
           });
-        });
+
+          return response.ok;
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((err) => false);
 
       commit('setDisabledAndLoading', false);
 
-      // eslint-disable-next-line no-restricted-globals
-      return location.reload();
+      return true;
     },
     logout({ commit }) {
       commit('clearUser');
@@ -159,9 +165,7 @@ const usersModule = {
         .then((data) => {
           commit('setStudentsData', data.body.users);
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch()
         .then(() => {
           commit('setLoadingStudentsData', false);
         });

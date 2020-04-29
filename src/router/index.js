@@ -62,6 +62,14 @@ const routes = [
       requiresAdminAuth: true,
     },
   },
+  {
+    path: '/admin/details/:controlNum',
+    name: 'Student details',
+    component: () => import('@/components/admin/student.details.component.vue'),
+    meta: {
+      requiresAdminAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({

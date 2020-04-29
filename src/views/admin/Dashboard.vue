@@ -36,7 +36,7 @@
             </v-navigation-drawer>
           </template>
         </v-col>
-        <v-col class="animated fadeInLeft slow" cols="12" xs="11" md="9" lg="10" xl="10">
+        <v-col class="animated fadeInLeft" cols="12" xs="11" md="9" lg="10" xl="10">
           <v-container class="py-0">
             <h1 class="font-weight-light mb-2">Historial de residentes</h1>
           <template>
@@ -54,8 +54,11 @@
                 </v-chip>
               </template>
               <template v-slot:item.actions="{ item }">
-                <v-btn small depressed color="blue" text dark v-if="item">Ver detalles</v-btn>
-                <v-btn text color="green">
+                <v-btn small depressed color="blue" text dark v-if="item"
+                       :to="`/admin/details/${item.controlNum}`">
+                  Ver detalles
+                </v-btn>
+                <v-btn @click="exportToXls()" text color="green">
                   <v-icon>fas fa-file-excel</v-icon>
                 </v-btn>
               </template>
@@ -69,6 +72,9 @@
 </template>
 
 <script>
+
+import XLSX from 'xlsx';
+
 export default {
   data: () => ({
     userName: '',
@@ -92,6 +98,20 @@ export default {
       { text: 'Semestre', value: 'semester' },
       { text: 'Progreso (%)', value: 'progress' },
       { text: '', value: 'actions' },
+    ],
+    dataToExport: [
+      {
+        name: 'Jorge',
+        occupation: 'Best Admin',
+      },
+      {
+        name: 'Héctor',
+        occupation: 'Worst Admin',
+      },
+      {
+        name: 'gmq',
+        occupation: ':shrug:',
+      },
     ],
   }),
   computed: {
@@ -127,6 +147,13 @@ export default {
       this.userName = userData.name;
       this.userId = userData.id;
       this.userControlNumber = userData.controlNum;
+    },
+    exportToXls() {
+      const data = XLSX.utils.json_to_sheet(this.studentsData[0].residenceData);
+      const workbook = XLSX.utils.book_new();
+      const filename = 'devschile-admins';
+      XLSX.utils.book_append_sheet(workbook, data, filename);
+      XLSX.writeFile(workbook, `${filename}.xlsx`);
     },
     async getUserData() {
       await this.$store.dispatch('usersModule/getUserData', this.userControlNumber);

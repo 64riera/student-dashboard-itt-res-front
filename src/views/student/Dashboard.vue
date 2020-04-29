@@ -591,9 +591,9 @@
                             :value="actualProgress"
                             >{{ actualProgress }} %</v-progress-circular
                           >
-                          <p class="mt-4">Completado, Vamos!</p>
+                          <p class="mt-4"></p>
                           <v-btn dark depressed rounded small color="orange accent-4"
-                            >Tienes dudas? Presiona aquí</v-btn
+                            >Completado, Vamos!</v-btn
                           >
                         </v-card-text>
                       </v-card>

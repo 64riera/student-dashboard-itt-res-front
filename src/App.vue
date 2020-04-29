@@ -39,6 +39,18 @@
         <v-icon>fas fa-arrow-left</v-icon>
       </v-btn>
 
+      <v-btn
+        to="/admin/dashboard"
+        v-if="isLogged &&
+              !this.$route.fullPath.includes('dashboard') &&
+              this.$route.fullPath.includes('admin')"
+        text
+        color="white"
+        class="animated fadeIn"
+      >
+        <v-icon>fas fa-arrow-left</v-icon>
+      </v-btn>
+
       <v-spacer></v-spacer>
 
       <v-btn class="animated fadeIn" @click="logout()" v-show="isLogged" text color="white">

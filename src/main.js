@@ -15,6 +15,7 @@ import AdminLoginComponent from '@/components/admin/auth/login.component.vue';
 
 // Dashboard views
 import AdminDashboard from '@/views/admin/Dashboard.vue';
+import StudentDetails from '@/components/admin/student.details.component.vue';
 
 import VueResource from 'vue-resource';
 import Notifications from 'vue-notification';
@@ -41,6 +42,7 @@ Vue.component('admin-login-component', AdminLoginComponent);
 
 // Dashboard views
 Vue.component('admin-dashboard', AdminDashboard);
+Vue.component('student-details', StudentDetails);
 
 Vue.config.productionTip = false;
 
