@@ -122,7 +122,7 @@ const usersModule = {
           const finalDataModel = [];
 
           students.forEach((student) => {
-            const dataModel = {
+            let dataModel = {
               Nombre_del_alumno: student.name,
               Apellidos: student.lastName,
               Edad: student.age,
@@ -135,14 +135,15 @@ const usersModule = {
 
             student.residenceData.forEach((step) => {
               if (step.stepId === '1-C') {
-                dataModel.push(step);
+                dataModel = {
+                  ...dataModel,
+                  ...step,
+                };
               }
             });
 
             finalDataModel.push(dataModel);
           });
-
-          console.log(finalDataModel);
 
           const dataToExport = XLSX.utils.json_to_sheet(finalDataModel);
           const workbook = XLSX.utils.book_new();
