@@ -4,6 +4,8 @@ import Vuex from 'vuex';
 const API_HOST = process.env.VUE_APP_API_HOST;
 const DROPBOX_API_KEY = process.env.VUE_APP_DROPBOX_API_KEY;
 const DROPBOX_API_URL = process.env.VUE_APP_DROPBOX_API_URL;
+const DROPBOX_API_DOWNLOAD_FILE_URL = process.env.VUE_APP_DROPBOX_API_FILE_DOWNLOAD_URL;
+const DROPBOX_API_TEMP_LINK_URL = process.env.VUE_APP_DROPBOX_TEMP_LINK_FILE_URL;
 
 const usersModule = {
   namespaced: true,
@@ -168,6 +170,35 @@ const usersModule = {
         .catch()
         .then(() => {
           commit('setLoadingStudentsData', false);
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    async downloadStudentFile({ commit }, payload) {
+      await fetch(DROPBOX_API_DOWNLOAD_FILE_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${DROPBOX_API_KEY}`,
+          'Content-Type': 'application/octet-stream',
+          'Dropbox-API-Arg': `{"path":"${payload}"}`,
+        },
+      })
+        .then((res) => res)
+        .then((data) => console.log(data));
+    },
+    // eslint-disable-next-line no-unused-vars
+    async getTemporalFileLink({ commit }, payload) {
+      await fetch(DROPBOX_API_TEMP_LINK_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${DROPBOX_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body:
+          `{"path":"${payload}"}`,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          window.open(data.link);
         });
     },
   },

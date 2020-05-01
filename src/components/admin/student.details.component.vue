@@ -86,6 +86,21 @@
                       {{ step.title }}
                     </h2>
                     <div>{{ step.msg }}</div>
+                    <v-btn
+                      @click="downloadStudentFile(step.fileRoute)"
+                      class="mt-4"
+                      depressed
+                      :color="step.color"
+                      dark
+                      small
+                      outlined
+                      v-if="step.fileRoute"
+                    >
+                      <v-icon left small>
+                        fas fa-file
+                      </v-icon>
+                      Descargar archivo
+                    </v-btn>
                   </div>
                 </v-timeline-item>
               </v-timeline>
@@ -196,7 +211,6 @@ export default {
     },
     verifyStateOfSteps() {
       this.studentData.residenceData.forEach((step) => {
-        console.log(step);
         switch (step.stepId) {
           case '1-B':
             this.step1bData.completed = true;
@@ -376,6 +390,9 @@ export default {
       ];
 
       return true;
+    },
+    downloadStudentFile(fileRoute) {
+      this.$store.dispatch('usersModule/getTemporalFileLink', fileRoute);
     },
   },
 };
