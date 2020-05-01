@@ -92,8 +92,7 @@
             v-if="!this.$route.fullPath.includes('login')"
             class="py-2 white--text text-center"
           >
-            {{ new Date().getFullYear() }} —
-            <strong>Desarrollado por © Sergio Rivera con &hearts;</strong>
+            <strong>Dev by © SR {{ new Date().getFullYear() }} with &hearts;</strong>
           </v-card-text>
           <v-card-title
             class="grey accent-3"

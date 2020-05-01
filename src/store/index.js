@@ -29,7 +29,6 @@ const usersModule = {
       localStorage.removeItem('isLogged');
     },
     setUserData(state, payload) {
-      if (!payload) return false;
       state.user = payload;
       return true;
     },
@@ -59,6 +58,7 @@ const usersModule = {
     },
     async getUserData({ commit }, payload) {
       const userData = JSON.parse(localStorage.getItem('currentToken'));
+      commit('setUserData', null);
       Vue.http.options.root = API_HOST;
       Vue.http.headers.common['auth-token'] = userData.accessToken;
       await Vue.http.post('user', { controlNum: payload })
