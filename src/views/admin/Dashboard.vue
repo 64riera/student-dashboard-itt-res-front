@@ -4,9 +4,14 @@
       <v-row>
         <v-col cols="12" xs="1" md="3" lg="2" xl="2">
           <template>
-            <v-navigation-drawer absolute left v-model="drawerState" clipped
-            :permanent="!this.$vuetify.breakpoint.xs && !this.$vuetify.breakpoint.sm"
-            class="animated fadeIn slow">
+            <v-navigation-drawer
+              absolute
+              left
+              v-model="drawerState"
+              clipped
+              :permanent="!this.$vuetify.breakpoint.xs && !this.$vuetify.breakpoint.sm"
+              class="animated fadeIn slow"
+            >
               <template v-slot:prepend>
                 <v-list-item two-line>
                   <v-list-item-avatar>
@@ -38,32 +43,68 @@
         </v-col>
         <v-col class="animated fadeInLeft" cols="12" xs="11" md="9" lg="10" xl="10">
           <v-container class="py-0">
-            <h1 class="font-weight-light mb-2">Historial de residentes</h1>
-          <template>
-            <v-data-table
-              v-if="studentsData"
-              :headers="headers"
-              :items="studentsData"
-              :loading="loadingStudentsData"
-              height="55vh"
-              class="elevation-0"
-            >
-              <template v-slot:item.progress="{ item }">
-                <v-chip small :color="getColor(item.residenceData.length)" dark>
-                  {{ ((item.residenceData.length * 100) / 8).toFixed(0) + '%' }}
-                </v-chip>
-              </template>
-              <template v-slot:item.actions="{ item }">
-                <v-btn small depressed color="blue" text dark v-if="item"
-                       :to="`/admin/details/${item.controlNum}`">
-                  Ver detalles
+            <v-card flat>
+              <v-card-title>
+                <h1
+                  class="font-weight-light display-1 mb-3"
+                  v-if="!this.$vuetify.breakpoint.xs && !this.$vuetify.breakpoint.sm"
+                >
+                  Historial de residentes
+                </h1>
+                <h1
+                  class="font-weight-light headline mb-3"
+                  v-if="this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm"
+                >
+                  Historial de residentes
+                </h1>
+                <v-spacer></v-spacer>
+                <v-btn
+                  @click="exportAll2Excel()"
+                  class="float-right"
+                  depressed
+                  dark
+                  color="green"
+                  small
+                >
+                  Exportar tabla a excel
+                  <v-icon x-small right>
+                    fas fa-download
+                  </v-icon>
                 </v-btn>
-                <v-btn @click="exportToXls()" text color="green">
-                  <v-icon>fas fa-file-excel</v-icon>
-                </v-btn>
+              </v-card-title>
+              <template>
+                <v-data-table
+                  v-if="studentsData"
+                  :headers="headers"
+                  :items="studentsData"
+                  :loading="loadingStudentsData"
+                  height="55vh"
+                  class="elevation-0"
+                >
+                  <template v-slot:item.progress="{ item }">
+                    <v-chip small :color="getColor(item.residenceData.length)" dark>
+                      {{ ((item.residenceData.length * 100) / 8).toFixed(0) + "%" }}
+                    </v-chip>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-btn
+                      small
+                      depressed
+                      color="blue"
+                      text
+                      dark
+                      v-if="item"
+                      :to="`/admin/details/${item.controlNum}`"
+                    >
+                      Ver detalles
+                    </v-btn>
+                    <v-btn @click="exportToXls(item.controlNum)" text color="green">
+                      <v-icon>fas fa-file-excel</v-icon>
+                    </v-btn>
+                  </template>
+                </v-data-table>
               </template>
-            </v-data-table>
-          </template>
+            </v-card>
           </v-container>
         </v-col>
       </v-row>
@@ -72,17 +113,12 @@
 </template>
 
 <script>
-
-import XLSX from 'xlsx';
-
 export default {
   data: () => ({
     userName: '',
     userId: '',
     userControlNumber: '',
-    items: [
-      { title: 'Inicio', icon: 'mdi-home-city' },
-    ],
+    items: [{ title: 'Inicio', icon: 'mdi-home-city' }],
     headers: [
       {
         text: 'Nombre',
@@ -146,12 +182,11 @@ export default {
       this.userId = userData.id;
       this.userControlNumber = userData.controlNum;
     },
-    exportToXls() {
-      const data = XLSX.utils.json_to_sheet(this.studentsData[0].residenceData);
-      const workbook = XLSX.utils.book_new();
-      const filename = 'devschile-admins';
-      XLSX.utils.book_append_sheet(workbook, data, filename);
-      XLSX.writeFile(workbook, `${filename}.xlsx`);
+    async exportToXls(controlNum) {
+      await this.$store.dispatch('usersModule/getUserData2Excel', controlNum);
+    },
+    async exportAll2Excel() {
+      await this.$store.dispatch('usersModule/getAllData2Excel');
     },
     async getUserData() {
       await this.$store.dispatch('usersModule/getUserData', this.userControlNumber);

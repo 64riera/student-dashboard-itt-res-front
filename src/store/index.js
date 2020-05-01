@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import XLSX from 'xlsx';
 
 const API_HOST = process.env.VUE_APP_API_HOST;
 const DROPBOX_API_KEY = process.env.VUE_APP_DROPBOX_API_KEY;
@@ -67,6 +68,92 @@ const usersModule = {
         .then((response) => {
           commit('setUserData', response.body);
         }, (err) => err);
+    },
+    async getUserData2Excel({ commit }, payload) {
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
+      commit('setLoadingStudentsData', true);
+      Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
+      await Vue.http.post('user', { controlNum: payload })
+        .then((response) => {
+          const student = response.body;
+
+          const dataModel = [
+            {
+              Nombre_del_alumno: student.name,
+              Apellidos: student.lastName,
+              Edad: student.age,
+              Carrera: student.career,
+              Numero_de_control: student.controlNum,
+              Correo: student.email,
+              Periodo: student.period,
+              Semestre: student.semester,
+            },
+          ];
+
+          student.residenceData.forEach((step) => {
+            if (step.stepId === '1-C') {
+              dataModel.push(step);
+            }
+          });
+
+          const data = XLSX.utils.json_to_sheet(dataModel);
+          const workbook = XLSX.utils.book_new();
+          const filename = `${student.name}-${student.controlNum}`;
+          XLSX.utils.book_append_sheet(workbook, data, filename);
+          XLSX.writeFile(workbook, `${filename}.xlsx`);
+          commit('setLoadingStudentsData', false);
+        // eslint-disable-next-line no-unused-vars
+        }, (err) => {
+          commit('setLoadingStudentsData', false);
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    async getAllData2Excel({ commit }, payload) {
+      commit('setLoadingStudentsData', true);
+
+      const userData = JSON.parse(localStorage.getItem('currentToken'));
+      Vue.http.options.root = API_HOST;
+      Vue.http.headers.common['auth-token'] = userData.accessToken;
+      await Vue.http.get('get')
+        .then((data) => {
+          const students = data.body.users;
+
+          const finalDataModel = [];
+
+          students.forEach((student) => {
+            const dataModel = {
+              Nombre_del_alumno: student.name,
+              Apellidos: student.lastName,
+              Edad: student.age,
+              Carrera: student.career,
+              Numero_de_control: student.controlNum,
+              Correo: student.email,
+              Periodo: student.period,
+              Semestre: student.semester,
+            };
+
+            student.residenceData.forEach((step) => {
+              if (step.stepId === '1-C') {
+                dataModel.push(step);
+              }
+            });
+
+            finalDataModel.push(dataModel);
+          });
+
+          console.log(finalDataModel);
+
+          const dataToExport = XLSX.utils.json_to_sheet(finalDataModel);
+          const workbook = XLSX.utils.book_new();
+          const filename = `Tabla Residencias-${Date.now()}`;
+          XLSX.utils.book_append_sheet(workbook, dataToExport, filename);
+          XLSX.writeFile(workbook, `${filename}.xlsx`);
+        })
+        .catch()
+        .then(() => {
+          commit('setLoadingStudentsData', false);
+        });
     },
     // eslint-disable-next-line no-unused-vars
     async saveResidenceRequest({ commit }, payload) {
@@ -183,7 +270,7 @@ const usersModule = {
         },
       })
         .then((res) => res)
-        .then((data) => console.log(data));
+        .then((data) => data);
     },
     // eslint-disable-next-line no-unused-vars
     async getTemporalFileLink({ commit }, payload) {
